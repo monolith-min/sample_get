@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:sample_get/src/components/avatar_widget.dart';
 
 import '../models/model_battle_response.dart';
+import 'battle_status_widget.dart';
 
 class BattleWidget extends StatelessWidget {
   BattleResponseModel data;
@@ -14,18 +14,27 @@ class BattleWidget extends StatelessWidget {
 
   Widget _battleTitleWidget() {
     return Container(
-        height: 50,
-        decoration: BoxDecoration(border: Border.all(color: Colors.white)),
+      height: 30,
+      decoration: BoxDecoration(border: Border.all(color: Colors.blue)),
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("개인전"),
+            const Text("개인전"),
+            const SizedBox(
+              width: 50,
+              height: 1,
+            ),
             Container(
               height: 10,
               width: 10,
               color: Colors.red,
             )
           ],
-        ));
+        ),
+      ),
+    );
   }
 
   Widget _status() {
@@ -56,61 +65,20 @@ class BattleWidget extends StatelessWidget {
   Widget _images() {
     return Container(
       width: Get.width,
-      color: Colors.blue,
-      child: Stack(
-        children: [
-          Container(
-            width: 20,
-            height: 20,
-            color: Colors.transparent
-          ),
-          ...List.generate(
+      child: Stack(children: [
+        Container(width: 29, height: 29, color: Colors.transparent),
+        ...List.generate(
           data.playerList!.length,
           (index) => Positioned(
             left: 15.0 * index,
-            width: 20,
-            height: 20,
             child: AvatarWidget(
               thumbPath: data.playerList![index].imageUrl ??
                   "https://i.pinimg.com/originals/43/6d/a2/436da29db0fdade76e6455e4b71bf1db.jpg",
-              size: 20,
+              size: 25,
             ),
           ),
-        ),]
-      ),
-      //     Stack(
-      //   children: [
-      //     AvatarWidget(
-      //       thumbPath:
-      //           "https://i.pinimg.com/originals/43/6d/a2/436da29db0fdade76e6455e4b71bf1db.jpg",
-      //       size: 20,
-      //     ),
-      //     Positioned(
-      //       left: 15,
-      //       child: AvatarWidget(
-      //         thumbPath:
-      //             "https://i.pinimg.com/originals/43/6d/a2/436da29db0fdade76e6455e4b71bf1db.jpg",
-      //         size: 20,
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 30,
-      //       child: AvatarWidget(
-      //         thumbPath:
-      //             "https://i.pinimg.com/originals/43/6d/a2/436da29db0fdade76e6455e4b71bf1db.jpg",
-      //         size: 20,
-      //       ),
-      //     ),
-      //     Positioned(
-      //       left: 45,
-      //       child: AvatarWidget(
-      //         thumbPath:
-      //             "https://i.pinimg.com/originals/43/6d/a2/436da29db0fdade76e6455e4b71bf1db.jpg",
-      //         size: 20,
-      //       ),
-      //     ),
-      //   ],
-      // ),
+        ),
+      ]),
     );
   }
 
@@ -121,13 +89,23 @@ class BattleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: [
-          _battleTitleWidget(),
-          _status(),
-          _images(),
-          _title(),
-        ],
+      color: Colors.green,
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          children: [
+            _battleTitleWidget(),
+            BattleStatusWidget(status: data.battleStatus),
+            const SizedBox(
+              height: 10,
+            ),
+            _images(),
+            const SizedBox(
+              height: 10,
+            ),
+            _title(),
+          ],
+        ),
       ),
     );
   }

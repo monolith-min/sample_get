@@ -23,6 +23,7 @@ class App extends GetView<BattleController> {
       body: Obx(
         () => GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 1,
               crossAxisSpacing: 1,
@@ -34,6 +35,5 @@ class App extends GetView<BattleController> {
         ),
       ),
     );
-//
   }
 }
