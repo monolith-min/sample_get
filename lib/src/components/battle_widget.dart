@@ -35,20 +35,19 @@ class BattleWidget extends StatelessWidget {
     );
   }
 
-  Widget _iamgeList() {
-    return Stack(
-      children: List.generate(
-        data.playerList!.length,
-        (index) => Positioned(
-          left: 0,
-          width: 20,
-          height: 20,
-          child: AvatarWidget(
-            thumbPath:
-                // "https://i.pinimg.com/originals/43/6d/a2/436da29db0fdade76e6455e4b71bf1db.jpg",
-                data.playerList![index].imageUrl!,
-            size: 20,
-          ),
+  List<Positioned> _iamgeList() {
+    return List.generate(
+      data.playerList!.length,
+      (index) => Positioned(
+        left: 10,
+        width: 20,
+        height: 20,
+        child: AvatarWidget(
+          thumbPath:
+              // "https://i.pinimg.com/originals/43/6d/a2/436da29db0fdade76e6455e4b71bf1db.jpg",
+              data.playerList![index].imageUrl ??
+                  "https://i.pinimg.com/originals/43/6d/a2/436da29db0fdade76e6455e4b71bf1db.jpg",
+          size: 20,
         ),
       ),
     );
@@ -56,42 +55,63 @@ class BattleWidget extends StatelessWidget {
 
   Widget _images() {
     return Container(
-        width: Get.width,
-        color: Colors.blue,
-        child: /*_iamgeList(),*/
-            Stack(
-          children: [
-            AvatarWidget(
-              thumbPath:
+      width: Get.width,
+      color: Colors.blue,
+      child: Stack(
+        children: [
+          Container(
+            width: 20,
+            height: 20,
+            color: Colors.transparent
+          ),
+          ...List.generate(
+          data.playerList!.length,
+          (index) => Positioned(
+            left: 15.0 * index,
+            width: 20,
+            height: 20,
+            child: AvatarWidget(
+              thumbPath: data.playerList![index].imageUrl ??
                   "https://i.pinimg.com/originals/43/6d/a2/436da29db0fdade76e6455e4b71bf1db.jpg",
               size: 20,
             ),
-            Positioned(
-              left: 15,
-              child: AvatarWidget(
-                thumbPath:
-                    "https://i.pinimg.com/originals/43/6d/a2/436da29db0fdade76e6455e4b71bf1db.jpg",
-                size: 20,
-              ),
-            ),
-            Positioned(
-              left: 30,
-              child: AvatarWidget(
-                thumbPath:
-                    "https://i.pinimg.com/originals/43/6d/a2/436da29db0fdade76e6455e4b71bf1db.jpg",
-                size: 20,
-              ),
-            ),
-            Positioned(
-              left: 45,
-              child: AvatarWidget(
-                thumbPath:
-                    "https://i.pinimg.com/originals/43/6d/a2/436da29db0fdade76e6455e4b71bf1db.jpg",
-                size: 20,
-              ),
-            ),
-          ],
-        ));
+          ),
+        ),]
+      ),
+      //     Stack(
+      //   children: [
+      //     AvatarWidget(
+      //       thumbPath:
+      //           "https://i.pinimg.com/originals/43/6d/a2/436da29db0fdade76e6455e4b71bf1db.jpg",
+      //       size: 20,
+      //     ),
+      //     Positioned(
+      //       left: 15,
+      //       child: AvatarWidget(
+      //         thumbPath:
+      //             "https://i.pinimg.com/originals/43/6d/a2/436da29db0fdade76e6455e4b71bf1db.jpg",
+      //         size: 20,
+      //       ),
+      //     ),
+      //     Positioned(
+      //       left: 30,
+      //       child: AvatarWidget(
+      //         thumbPath:
+      //             "https://i.pinimg.com/originals/43/6d/a2/436da29db0fdade76e6455e4b71bf1db.jpg",
+      //         size: 20,
+      //       ),
+      //     ),
+      //     Positioned(
+      //       left: 45,
+      //       child: AvatarWidget(
+      //         thumbPath:
+      //             "https://i.pinimg.com/originals/43/6d/a2/436da29db0fdade76e6455e4b71bf1db.jpg",
+      //         size: 20,
+      //       ),
+      //     ),
+      //   ],
+      // ),
+    );
   }
 
   Widget _title() {
